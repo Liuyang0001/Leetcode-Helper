@@ -1,15 +1,17 @@
 # Leetcode-Helper
 
-![](https://badgen.net/badge/Coder/Mr Liu/red?icon=github)![](https://badgen.net/badge/Python/ 3.7.6/yellow?)![](https://badgen.net/badge/pandas/ 1.0.1/green?) ![](https://badgen.net/badge/requests/ 2.22.0/blue?)
+<p> 
+<img src="https://badgen.net/badge/Coder/Mr.Liu/red?icon=github" alt="">
+<img src="https://badgen.net/badge/Python/3.7.6/yellow?" alt="">
+<img src="https://badgen.net/badge/pandas/1.0.1/green?" alt="">
+<img src="https://badgen.net/badge/requests/ 2.22.0/blue?" alt="">
+</p>
 
 哪个~~男孩~~程序员不想一键下载写过的代码，并且生成一份好看的README呢？
 
 真的有人会不点:star:吗?  不会吧，不会吧，不会吧。
 
-
-
 <hr>
-
 **:heart:主要功能:heart:**
 
 :cat: 模拟登陆力扣中国站(leetcode-cn)
