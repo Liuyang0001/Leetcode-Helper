@@ -1,0 +1,9 @@
+{
+    "email": "xxxxxx",
+    "password": "xxxxxx",
+    "outdir": "xxxxxx",
+    "git_url": "https://github.com/xxxxx/xxxxx/tree/master/codes_auto/",
+    "download_start_id": 1, 
+    "download_end_id": 10000,
+    "refresh": false
+}
