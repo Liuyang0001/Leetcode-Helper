@@ -11,7 +11,10 @@
 
 真的有人会不点:star:吗?  不会吧，不会吧，不会吧。
 
+
 <hr>
+
+
 **:heart:主要功能:heart:**
 
 :cat: 模拟登陆力扣中国站(leetcode-cn)
@@ -20,18 +23,21 @@
 
 :cat: 自动生成优美的github的README文件至本地。
 
-:cat: 支持指定id区间的源码下载保存。​
+:cat: 支持指定id区间的源码下载保存。
+
+
 
 <hr>
+
 **少啰嗦，先看东西 :      [具体生成效果。点击这里](https://github.com/Liuyang0001/LeetCode_By_Python)**
 
 生成的README效果图：
 
-![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200612225140.png)
+![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200613002933.png)
 
 生成的源码效果图：
 
-![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200612225252.png)
+![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200613002649.png)
 
 <hr>
 
@@ -64,6 +70,7 @@ python main,py
 ```
 
 <hr>
+
 > 其他说明：
 >
 > 1. 第一次运行比较慢，主要是爬取速度太快太频繁，会偶尔无回应。
@@ -71,6 +78,7 @@ python main,py
 > 3. 如果发生异常，请尝试重新运行
 > 4. 为了运行速度，已生成代码不会覆盖，相同题的代码仅保留一份ac的。
 > 5. 如果大家有需求的话，可能还会写个GUI界面，会更直观一点，没人的话就算了。
+
 
 
 
