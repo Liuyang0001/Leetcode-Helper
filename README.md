@@ -4,7 +4,7 @@
 <img src="https://badgen.net/badge/Coder/Mr.Liu/red?icon=github" alt="">
 <img src="https://badgen.net/badge/Python/3.7.6/yellow?" alt="">
 <img src="https://badgen.net/badge/pandas/1.0.1/green?" alt="">
-<img src="https://badgen.net/badge/requests/ 2.22.0/blue?" alt="">
+<img src="https://badgen.net/badge/requests/2.22.0/blue?" alt="">
 </p>
 
 哪个~~男孩~~程序员不想一键下载写过的代码，并且生成一份好看的README呢？
@@ -25,6 +25,8 @@
 
 :cat: 支持指定id区间的源码下载保存。
 
+:cat: 加入失败重试机制，减少延时，加快下载速度。:new:
+
 
 
 <hr>
@@ -33,11 +35,17 @@
 
 生成的README效果图：
 
-![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200613002933.png)
+![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200613133201.png)
+
+
+
+
 
 生成的源码效果图：
 
-![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200613002649.png)
+![](https://gitee.com/liuyang0001/blogimage/raw/master/img/20200619174224.png)
+
+
 
 <hr>
 
@@ -55,7 +63,7 @@ git clone https://github.com/Liuyang0001/Leetcode-Helper.git
 {
     "email": "xx账号xxxx",
     "password": "xxx密码xxx",
-    "outdir": "xxxxxx",
+    "outdir": "x:/xxxxxx/",
     "git_url": "https://github.com/xxxxx/xxx仓库名xx/tree/master/codes_auto/",
     "download_start_id": 1, 
     "download_end_id": 10000,
@@ -63,11 +71,21 @@ git clone https://github.com/Liuyang0001/Leetcode-Helper.git
 }
 ```
 
-3. 运行`main.py`文件
+3. 安装依赖库
+
+依赖库为`retry` ，`pandas` ，`requests`，可自行安装，或者使用：
 
 ```
-python main,py
+pip install -r requirement.txt
 ```
+
+4. 运行`main.py`文件
+
+```
+python main.py
+```
+
+5. Enjoy it !​ ​ :happy:
 
 <hr>
 
@@ -75,7 +93,7 @@ python main,py
 >
 > 1. 第一次运行比较慢，主要是爬取速度太快太频繁，会偶尔无回应。
 > 2. 题库后续会增加局部更新，就不用每次都全局更新，请持续关注。
-> 3. 如果发生异常，请尝试重新运行
+> 3. ~~如果发生异常，请尝试重新运行 。~~   已加入失败重试机制。
 > 4. 为了运行速度，已生成代码不会覆盖，相同题的代码仅保留一份ac的。
 > 5. 如果大家有需求的话，可能还会写个GUI界面，会更直观一点，没人的话就算了。
 
@@ -87,3 +105,4 @@ python main,py
 万水千山总是情，给个:star: 行不行，感谢大家。
 
 Enjoy coding！
+

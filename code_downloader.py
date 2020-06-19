@@ -2,12 +2,16 @@ import re
 import os
 import time
 import json
+import logging
 import pandas as pd
+from retry import retry # 重试装饰器
 from pathlib import Path
 from login import login
 
 
 # 通过提交id来获取上次提交的代码
+# 加入失败重试机制
+@retry(tries=5, delay=10, backoff=1.5, jitter=(3, 5), logger=logging.getLogger(__name__))
 def get_submission_by_id(session, submission_id):
     if not submission_id:
         return None
@@ -50,42 +54,35 @@ def code_downloader(session, start: int, end: int, outdir: str) -> None:
         # 使得开始结束不超过最大值
         start = min(len(data), start)
         end = min(len(data), end)
-        # print(data)
-        ls = [0] + [i for i in range(0, len(data), 50)] + [len(data)]
-        print(ls)
-        for idx in range(len(ls)-1):
-            s, e = ls[idx], ls[idx + 1]
-            for i in range(s,e):
-                id, slug, status, level, vip_only, title_cn, tags_cn, \
-                    submission_id, lang = data.iloc[i]
-                print(id, slug, status, level, vip_only)
-                if id < start: continue
-                if id >= end: break
-                # 当前题未有ac解,继续下一题
-                if status != "ac": continue
-                lang_dic = {
-                    "python3": ".py",
-                    "python": ".py",
-                    "java": ".java",
-                    "cpp": ".cpp",
-                    "c": ".c",
-                    "bash": ".sh"
-                    }
-                codedir = outdir + "/codes_auto/"
-                if not os.path.exists(codedir):
-                    os.makedirs(codedir)
-                
-                code_file = outdir + "/codes_auto/" + str(id) + "." + slug + lang_dic.get(lang,"")
-                code_file = Path(code_file) # 格式化path
-                if os.path.exists(code_file): continue
-                # 获取源码
-                code = get_submission_by_id(session, submission_id)
-                # print(code)
-                write_code_to_file(code, code_file, str(id), slug, lang)
-                time.sleep(0.5)  # 访问太快会报错,访问次数过多也会报错
-            time.sleep(2) # 每爬取50个延时2s
-                
-
+        for i in range(len(data)):
+            id, slug, status, level, vip_only, title_cn, tags_cn, \
+                submission_id, lang = data.iloc[i]
+            print(f"[{id}-{slug}] Done.")
+            if id < start: continue
+            if id >= end: break
+            # 当前题未有ac解,继续下一题
+            if status != "ac": continue
+            lang_dic = {
+                "python3": ".py",
+                "python": ".py",
+                "java": ".java",
+                "cpp": ".cpp",
+                "c": ".c",
+                "bash": ".sh"
+                }
+            codedir = outdir + "/codes_auto/"
+            codedir = Path(codedir)
+            if not os.path.exists(codedir):
+                os.makedirs(codedir)
+            
+            code_file = outdir + "/codes_auto/" + str(id) + "." + slug + lang_dic.get(lang,"")
+            code_file = Path(code_file) # 格式化path
+            if os.path.exists(code_file): continue
+            # 获取源码
+            code = get_submission_by_id(session, submission_id)
+            write_code_to_file(code, code_file, str(id), slug, lang)
+            # print("Done.")
+            time.sleep(0.1)  # 访问太快会报错,访问次数过多也会报错
 
 
 
