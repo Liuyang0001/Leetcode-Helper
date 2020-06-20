@@ -2,8 +2,8 @@ import os
 import json
 import pandas as pd
 from pathlib import Path
-from login import login
-from database_maker import get_problems
+from pkg.login import login
+from pkg.database_maker import get_problems
 
 
 # 生成表格上方的内容
@@ -79,14 +79,16 @@ def grids_maker(git_url, outdir):
                 else:
                     source = "To Do"
                 line = f"|{id}|{title_cn}|{level}|{tags_cn}|{source}|\n"
-                print(line)
+                # print(line)
                 md.write(line)
 
 
 # 生成md文件
 def readme_maker(user_state, git_url, outdir):
+    print("README.md is building...")
     head_maker(user_state, outdir)
     grids_maker(git_url, outdir)
+    print("README.md has been Done.")
 
 
 if __name__ == "__main__":

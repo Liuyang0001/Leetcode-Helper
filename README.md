@@ -1,4 +1,4 @@
-# Leetcode-Helper
+# Leetcode-Helper 
 
 <p> 
 <img src="https://badgen.net/badge/Coder/Mr.Liu/red?icon=github" alt="">
@@ -19,11 +19,11 @@
 
 :cat: 模拟登陆力扣中国站(leetcode-cn)
 
-:cat: 顺序爬取每题最新的提交代码，保存至本地。
+:cat: 爬取每题提交的ac代码，保存至本地。
 
-:cat: 自动生成优美的github的README文件至本地。
+:cat: 自动生成优美的README文件至本地。
 
-:cat: 支持指定id区间的源码下载保存。
+:cat: 支持自动更新至Github仓库。​ :new:
 
 :cat: 加入失败重试机制，减少延时，加快下载速度。:new:
 
@@ -63,7 +63,7 @@ git clone https://github.com/Liuyang0001/Leetcode-Helper.git
 {
     "email": "xx账号xxxx",
     "password": "xxx密码xxx",
-    "outdir": "x:/xxxxxx/",
+    "repo_path": "x:/xxxxxx/",
     "git_url": "https://github.com/xxxxx/xxx仓库名xx/tree/master/codes_auto/",
     "download_start_id": 1, 
     "download_end_id": 10000,
@@ -73,7 +73,7 @@ git clone https://github.com/Liuyang0001/Leetcode-Helper.git
 
 3. 安装依赖库
 
-依赖库为`retry` ，`pandas` ，`requests`，可自行安装，或者使用：
+依赖库为`retry` ，`pandas` ，`requests`，`gitpython`可自行安装，或者使用：
 
 ```
 pip install -r requirement.txt
@@ -85,13 +85,13 @@ pip install -r requirement.txt
 python main.py
 ```
 
-5. Enjoy it !​ ​ :happy:
+
 
 <hr>
 
 > 其他说明：
 >
-> 1. 第一次运行比较慢，主要是爬取速度太快太频繁，会偶尔无回应。
+> 1. 第一次运行比较慢，主要是需要建立本地数据库，请耐心等待。
 > 2. 题库后续会增加局部更新，就不用每次都全局更新，请持续关注。
 > 3. ~~如果发生异常，请尝试重新运行 。~~   已加入失败重试机制。
 > 4. 为了运行速度，已生成代码不会覆盖，相同题的代码仅保留一份ac的。

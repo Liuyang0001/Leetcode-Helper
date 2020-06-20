@@ -43,5 +43,4 @@ if __name__ == "__main__":
         START_ID = config['download_start_id']
         END_ID = config["download_end_id"]
 
-    SESSION = login(EMAIL, PASSWORD)  # 登陆账号
-    
+    SESSION = login(EMAIL, PASSWORD) # 登陆账号

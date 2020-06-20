@@ -6,7 +6,7 @@ import logging
 import pandas as pd
 from retry import retry # 重试装饰器
 from pathlib import Path
-from login import login
+from pkg.login import login
 
 
 # 通过提交id来获取上次提交的代码
