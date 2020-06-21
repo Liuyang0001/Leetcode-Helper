@@ -8,7 +8,7 @@ def git_commit(repo_path):
     repo = git.Repo(repo_path)
     g = repo.git
     g.add('.') # git add .
-    g.commit('-m', 'Update from LC Helper.') # git commit -m "..."
+    g.commit('-m', 'Update from Lc-Helper.') # git commit -m "..."
     
     # 获取远程仓库
     remote = repo.remote()
