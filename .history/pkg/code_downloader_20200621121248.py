@@ -48,7 +48,7 @@ def write_code_to_file(code, code_file, id, slug, lang,):
 # 下载对应id区间的源码
 def code_downloader(session, start: int, end: int, outdir: str) -> None:
     if start < 1: start = 1
-    datafile = Path("./database/database.csv")
+    datafile = Path("database\database.csv")
     with open(datafile, "r", encoding="utf-8") as f:
         data = pd.read_csv(f, header=None)
         # 使得开始结束不超过最大值
