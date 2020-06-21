@@ -12,7 +12,8 @@ def head_maker(user_state, outdir):
     ls = [
         '# Stay hangury ，Stay foolish \n\n',
         '<p> \n',
-        'Jeff ',
+        '<img src=\"https://img.shields.io/badge/User-{}-purple.svg?\" alt=\"\">\n'.format(
+            user_state['user_name']),
         '<img src=\"https://img.shields.io/badge/Solved-{}/{}-blue.svg?\" alt=\"\">\n'.format(
             user_state["num_solved"], user_state["num_total"]),
         '<img src=\"https://img.shields.io/badge/Easy-{}-yellow.svg?\" alt=\"\">\n'.format(
