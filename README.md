@@ -29,7 +29,7 @@
 
 🍉 加入失败重试机制，减少延时，加快下载速度。🆕
 
-🍉 加入局部更新功能(根据最近的提交来更新) 🆕
+🍉 加入局部更新功能(根据最近的提交来更新)【默认选项】 🆕
 
 
 
@@ -70,11 +70,12 @@ git clone https://github.com/Liuyang0001/Leetcode-Helper.git
 {
     "email": "xx账号xxxx",
     "password": "xxx密码xxx",
-    "repo_path": "x:/xxxxxx/",
+    "repo_path": "x:/xxx源码仓库的本地路径xxx/",
     "git_url": "https://github.com/xxxxx/xxx仓库名xx/tree/master/codes_auto/",
     "download_start_id": 1, 
-    "download_end_id": 10000,
-    "refresh": false
+    "download_end_id": 1000000,
+    "refresh": false,
+    "get_recent_submissions_nums": 40
 }
 ```
 
