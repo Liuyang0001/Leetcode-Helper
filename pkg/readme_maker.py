@@ -47,7 +47,7 @@ def grids_maker(git_url, outdir):
     datafile = Path("database/database.csv")
     md_path = Path(outdir+"/README.md")
     with open(datafile, "r", encoding="utf-8") as f:
-        data = pd.read_csv(f, header=None)
+        data = pd.read_csv(f)
         with open(md_path, "a+", encoding="utf-8") as md:
             md.writelines(grids_head)
             for i in range(len(data)):
@@ -85,23 +85,13 @@ def grids_maker(git_url, outdir):
 
 # 生成md文件
 def readme_maker(user_state, git_url, outdir):
-    print("README.md is building...")
+    print("# Start building README.md...")
     head_maker(user_state, outdir)
     grids_maker(git_url, outdir)
-    print("README.md has been Done.")
+    print("  Done.")
+    print("--------------------------------------------")
+
 
 
 if __name__ == "__main__":
-    with open("config.json", "r", encoding="utf-8") as f:
-        config = json.loads(f.read())
-        EMAIL = config['email']
-        PASSWORD = config["password"]
-        REFRESH = config['refresh']
-        OUTDIR = config["outdir"]
-        GIT_URL = config["git_url"]
-        START_ID = config['download_start_id']
-        END_ID = config["download_end_id"]
-
-    session = login(EMAIL, PASSWORD)
-    user_state = get_problems(session,REFRESH)
-    readme_maker(user_state,GIT_URL,OUTDIR)
+    pass

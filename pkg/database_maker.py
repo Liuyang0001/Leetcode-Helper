@@ -6,6 +6,7 @@ import requests
 import pandas as pd
 from pathlib import Path
 from pkg.login import login
+from pkg.get_recent_submissions import get_recent_submissions
 
 
 # 按行写入csv文件
@@ -64,7 +65,7 @@ def get_problems(session, refresh):
         level = question['difficulty']['level']
         vip_only = question['paid_only']  # 是否为付费题目
         write_to_csv(id, slug, status, level, vip_only)
-        print(id, slug,status)  # 当前写入的数据id和名称
+        # print(id, slug,status)  # 当前写入的数据id和名称
     
     return user_state
 
@@ -163,7 +164,9 @@ def build_database(session, refresh):
         refresh = True
     
     # 是否更新题库内容
-    if not refresh: return
+    if not refresh:
+        # 局部更新数据库
+        return
     
     # 如果已将存在输出文件，先删除再重建
     if os.path.exists(database):
@@ -203,32 +206,25 @@ def build_database(session, refresh):
                 }]
             # print(content_cn) # 中文题目描述
             df = pd.DataFrame(cont_ls, columns=columns_ls)
-            print(id, title_cn)
-            df.to_csv(database, index=False, mode="a+", header=False)
+
+            # 只写入一次标题头
+            df.to_csv(database, index=False, mode='a+', header=(not os.path.exists(database)))
+            # 总是不写入标题头
+            # df.to_csv(database, index=False, mode="a+", header=False)
 
 
 # 建立csv数据库
 def database_maker(session, refresh):
+    print("# Start building database...")
     # 获取最新的用户数据字典
     user_state = get_problems(session, refresh)
     # 建立个人数据库
     build_database(session, refresh)
+    print("  Done.")
+    print("--------------------------------------------")
     return user_state
 
 
-if __name__ == "__main__":
-    with open("config.json", "r", encoding="utf-8") as f:
-        config = json.loads(f.read())
-        EMAIL = config['email']
-        PASSWORD = config["password"]
-        REFRESH = config['refresh']
-        OUTDIR = config["outdir"]
-        GIT_URL = config["git_url"]
-        START_ID = config['download_start_id']
-        END_ID = config["download_end_id"]
 
-    SESSION = login(EMAIL, PASSWORD)
-    # 获取最新的用户数据字典
-    user_state = get_problems(SESSION, REFRESH)
-    # 建立个人数据库
-    build_database(SESSION, REFRESH)
+if __name__ == "__main__":
+    pass

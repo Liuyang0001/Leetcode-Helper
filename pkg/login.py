@@ -33,14 +33,4 @@ def login(EMAIL,PASSWORD):
 
 
 if __name__ == "__main__":
-    with open("config.json", "r", encoding="utf-8") as f:
-        config = json.loads(f.read())
-        EMAIL = config['email']
-        PASSWORD = config["password"]
-        REFRESH = config['refresh']
-        OUTDIR = config["outdir"]
-        GIT_URL = config["git_url"]
-        START_ID = config['download_start_id']
-        END_ID = config["download_end_id"]
-
-    SESSION = login(EMAIL, PASSWORD) # 登陆账号
+    pass

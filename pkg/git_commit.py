@@ -4,6 +4,7 @@ from pathlib import Path
 
 
 def git_commit(repo_path):
+    print("# Start committing to the remote repository...")
     repo_path = Path(repo_path)
     repo = git.Repo(repo_path)
     g = repo.git
@@ -14,19 +15,10 @@ def git_commit(repo_path):
     remote = repo.remote()
     # 推送本地修改到远程仓库
     remote.push()
-
+    print("  Done.")
+    print("--------------------------------------------")
 
 
 
 if __name__ == "__main__":
-    with open("config.json", "r", encoding="utf-8") as f:
-        config = json.loads(f.read())
-        EMAIL = config['email']
-        PASSWORD = config["password"]
-        REFRESH = config['refresh']
-        REPO_PATH = config["repo_path"]
-        GIT_URL = config["git_url"]
-        START_ID = config['download_start_id']
-        END_ID = config["download_end_id"]
-    
-    git_commit(REPO_PATH)
+    pass
