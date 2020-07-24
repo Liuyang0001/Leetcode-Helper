@@ -7,11 +7,6 @@ import logging
 import pandas as pd
 from pathlib import Path
 from retry import retry  # 重试装饰器
-# -------添加环境变量--------------------------
-pkg_path = Path(os.getcwd() + '\\pkg\\')
-print(pkg_path)
-sys.path.append(pkg_path)
-# --------------------------------------------
 from pkg.login import login
 
 

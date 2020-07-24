@@ -11,7 +11,8 @@ from pkg.get_recent_submissions import get_recent_submissions
 
 # 按行写入csv文件
 def write_to_csv(id, slug, status, level, vip_only):
-    datafile = "database/data.csv"
+    # datafile = "database/data.csv"
+    datafile = Path("database/data.csv")
     # level_dic = {1: "简单", 2: "中等", 3: "困难"}
     columns_ls = ["id", "slug", "status", "level", "vip_only"]
     cont_ls = [{"id": id, "slug": slug, "status": status,
@@ -200,7 +201,7 @@ def build_database(session, refresh):
                     "level": level,
                     "vip_only": vip_only,
                     "title_cn": title_cn,
-                    "tags_cn": ";".join(tags_cn),
+                    "tags_cn": "、".join(tags_cn),
                     "submission_id": submission_id,
                     "lang": lang
                 }]
@@ -228,3 +229,4 @@ def database_maker(session, refresh):
 
 if __name__ == "__main__":
     pass
+ 
