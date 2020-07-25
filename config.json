@@ -1,8 +1,8 @@
 {
-    "email": "xx账号xxxx",
-    "password": "xxx密码xxx",
-    "repo_path": "x:/xxx源码仓库的本地路径xxx/",
-    "git_url": "https://github.com/xxxxx/xxx仓库名xx/tree/master/codes_auto/",
+    "email": "你的邮箱账号",
+    "password": "你的密码",
+    "repo_path": "你源码仓库的本地路径，如:/home/liu/leetcode/",
+    "git_url": "https://github.com/你的用户名/你的仓库名/tree/master/codes_auto/",
     "download_start_id": 1, 
     "download_end_id": 1000000,
     "refresh": false,

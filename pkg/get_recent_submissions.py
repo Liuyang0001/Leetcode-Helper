@@ -6,6 +6,7 @@ import pandas as pd
 from pathlib import Path
 from pkg.login import login
 from pkg.code_downloader import write_code_to_file
+from pkg.code_downloader import get_submission_by_id
 
 
 # 从最近提交的内容提取有效的部分
@@ -52,7 +53,7 @@ def get_useful_information(session, num:int)->dict:
 
 
 
-def save_from_dic(submissions_dic, repo_path):
+def save_from_dic(session, submissions_dic, repo_path):
     database = Path("database/database.csv")
     df = pd.read_csv(database, encoding="utf-8")
     df = df.astype(str)
@@ -86,7 +87,9 @@ def save_from_dic(submissions_dic, repo_path):
         code_file = repo_path + "/codes_auto/" + str(int(id)) + "." + slug + lang_dic.get(lang,"")
         code_file = Path(code_file) # 格式化path
         if os.path.exists(code_file): continue
-        code = submissions_dic[title]["code"]
+        # print(submissions_dic[title])
+        submission_id = submissions_dic[title]["id"]
+        code = get_submission_by_id(session, str(submission_id))
         # 已经存在一份ac解，则跳过
         print(f"[{id}.{slug}.{lang}]")
         write_code_to_file(code, code_file, str(int(id)), slug, lang)
@@ -96,7 +99,7 @@ def save_from_dic(submissions_dic, repo_path):
 def get_recent_submissions(session, recent_num, repo_path):
     print("# Start geting recent submissions...")
     submissions_dic = get_useful_information(session, recent_num)
-    save_from_dic(submissions_dic, repo_path)
+    save_from_dic(session, submissions_dic, repo_path)
     print("  Done.")
     print("--------------------------------------------")
 

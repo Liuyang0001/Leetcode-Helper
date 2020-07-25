@@ -75,3 +75,4 @@ if __name__ == "__main__":
     lc.build_readme()
     lc.git_commit()
     lc.close()
+    

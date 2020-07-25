@@ -67,6 +67,7 @@ def get_problems(session, refresh):
         vip_only = question['paid_only']  # 是否为付费题目
         write_to_csv(id, slug, status, level, vip_only)
         # print(id, slug,status)  # 当前写入的数据id和名称
+        print(f"[{id}.{slug}]")
     
     return user_state
 
