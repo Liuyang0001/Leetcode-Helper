@@ -9,6 +9,7 @@ from pkg.code_downloader import write_code_to_file
 from pkg.code_downloader import get_submission_by_id
 
 
+
 # 从最近提交的内容提取有效的部分
 def get_useful_information(session, num:int)->dict:
     submissions_dic = {}
@@ -53,8 +54,8 @@ def get_useful_information(session, num:int)->dict:
 
 
 
-def save_from_dic(session, submissions_dic, repo_path):
-    database = Path("database/database.csv")
+def save_from_dic(session, submissions_dic, repo_path, database_dir):
+    database = Path(database_dir + "/database.csv")
     df = pd.read_csv(database, encoding="utf-8")
     df = df.astype(str)
     for title in submissions_dic.keys():
@@ -96,10 +97,10 @@ def save_from_dic(session, submissions_dic, repo_path):
         time.sleep(0.1)  
 
 
-def get_recent_submissions(session, recent_num, repo_path):
+def get_recent_submissions(session, recent_num, repo_path, database_dir):
     print("# Start geting recent submissions...")
     submissions_dic = get_useful_information(session, recent_num)
-    save_from_dic(session, submissions_dic, repo_path)
+    save_from_dic(session, submissions_dic, repo_path, database_dir)
     print("  Done.")
     print("--------------------------------------------")
 

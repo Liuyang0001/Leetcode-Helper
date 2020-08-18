@@ -1,24 +1,21 @@
 import re
 import os
-import sys
 import time
-import json
 import logging
 import pandas as pd
 from pathlib import Path
 from retry import retry  # 重试装饰器
-from pkg.login import login
 
 
 
 # 通过提交id来获取上次提交的代码
 # 加入失败重试机制
-@retry(tries=5, delay=12, backoff=1.5, jitter=(3, 5), logger=logging.getLogger(__name__))
+@retry(tries=5, delay=10, backoff=1.5, jitter=(3, 5), logger=logging.getLogger(__name__))
 def get_submission_by_id(session, submission_id):
     if not submission_id:
         return None
     url = "https://leetcode-cn.com/submissions/detail/" + str(int(submission_id))
-    # print(url)
+    # print(url) # 判断当前的url是否正确
     # 浏览器标识
     user_agent = r"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)"
     headers = {'User-Agent': user_agent, 'Connection': 'keep-alive',
@@ -57,11 +54,9 @@ def write_code_to_file(code, code_file, id, slug, lang):
 
 
 # 下载对应id区间的源码
-def code_downloader(session, start: int, end: int, outdir: str) -> None:
+def code_downloader(session, database_dir, start: int, end: int, outdir: str) -> None:
     if start < 1: start = 1
-    datafile = "database/database.csv"
-    datafile = Path(datafile)
-    # print(datafile)
+    datafile = Path(database_dir + "/database.csv")
     with open(datafile, "r", encoding="utf-8") as f:
         data = pd.read_csv(f)
         # 使得开始结束不超过最大值
@@ -91,7 +86,6 @@ def code_downloader(session, start: int, end: int, outdir: str) -> None:
             
             code_file = outdir + "/codes_auto/" + str(id) + "." + slug + lang_dic.get(lang,"")
             code_file = Path(code_file) # 格式化path
-            # print(code_file)
             if os.path.exists(code_file): continue
             # 获取源码
             code = get_submission_by_id(session, submission_id)

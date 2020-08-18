@@ -1,5 +1,5 @@
 import os
-import re
+import sys
 import json
 import time
 import requests
@@ -9,10 +9,11 @@ from pkg.login import login
 from pkg.get_recent_submissions import get_recent_submissions
 
 
+
 # 按行写入csv文件
 def write_to_csv(id, slug, status, level, vip_only):
     # datafile = "database/data.csv"
-    datafile = Path("database/data.csv")
+    # datafile = Path(cur_dir + "/database/data.csv")
     # level_dic = {1: "简单", 2: "中等", 3: "困难"}
     columns_ls = ["id", "slug", "status", "level", "vip_only"]
     cont_ls = [{"id": id, "slug": slug, "status": status,
@@ -23,7 +24,7 @@ def write_to_csv(id, slug, status, level, vip_only):
 
 
 # 调用api获取题目的状态
-def get_problems(session, refresh):
+def get_problems(session, refresh, database_dir):
     # 用户数据字典
     user_state = {}
     # 获取账号信息api地址
@@ -43,14 +44,13 @@ def get_problems(session, refresh):
     print("用户：", user_state["user_name"], "已解决：{}/{}".format(
         user_state["num_solved"], user_state["num_total"]))
     
-    # 数据路径创建(使用Path不用区分平台)
-    datadir = Path("database/")
-    datafile = Path("database/data.csv")
+    # # 数据路径创建(使用Path不用区分平台)
+    datafile = Path(database_dir + "/data.csv")
 
     # 如果未创建过数据文件，则第一次必定创建
-    if not os.path.exists(datadir):
+    if not os.path.exists(database_dir):
         refresh = True
-        os.makedirs(datadir)
+        os.makedirs(database_dir)
     # 是否更新题库内容
     if not refresh: return user_state
     # 如果已将存在输出文件，先删除再重建
@@ -67,7 +67,6 @@ def get_problems(session, refresh):
         vip_only = question['paid_only']  # 是否为付费题目
         write_to_csv(id, slug, status, level, vip_only)
         # print(id, slug,status)  # 当前写入的数据id和名称
-        print(f"[{id}.{slug}]")
     
     return user_state
 
@@ -156,10 +155,10 @@ def get_recent_submissions_id(session, slug: str):
 
 
 # 建立数据库
-def build_database(session, refresh):
+def build_database(session, refresh, database_dir):
     
-    datafile = Path("database/data.csv")
-    database = Path("database/database.csv")
+    datafile = Path(database_dir + "/data.csv")
+    database = Path(database_dir + "/database.csv")
 
     # 如果未创建过数据文件，则第一次必定创建
     if not os.path.exists(database):
@@ -216,12 +215,12 @@ def build_database(session, refresh):
 
 
 # 建立csv数据库
-def database_maker(session, refresh):
+def database_maker(session, refresh, database_dir):
     print("# Start building database...")
     # 获取最新的用户数据字典
-    user_state = get_problems(session, refresh)
+    user_state = get_problems(session, refresh, database_dir)
     # 建立个人数据库
-    build_database(session, refresh)
+    build_database(session, refresh, database_dir)
     print("  Done.")
     print("--------------------------------------------")
     return user_state
